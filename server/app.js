@@ -2,11 +2,12 @@ var express = require('express');
 var mongoose = require('mongoose');
 var assignment = require('./routes/assignments');
 var index = require('./routes/index');
-
+var bodyParser = require('body-parser');
 var mongoURI = "mongodb://localhost:27017/assignments";
 var MongoDB = mongoose.connect(mongoURI).connection;
-
 var app = express();
+
+app.use(bodyParser.json());
 app.use('/', index);
 app.use(express.static('server/public'));
 app.use('/assignment', assignment);

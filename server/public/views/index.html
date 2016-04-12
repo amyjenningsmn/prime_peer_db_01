@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html ng-app="app">
+  <head lang="en">
     <meta charset="utf-8">
     <title>Assignment App</title>
+    <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/assets/scripts/client.js"></script>
   </head>
-  <body>
-    <h1>Assignment App</h1>
+  <body ng-controller="MainController">
+    <h1>Assignment Application</h1>
+    <div >
+      <!-- <form novalidate> -->
+        {{test}}
+        Assignment Number: <input type="text" ng-model="assignment.assignment_number" /><br />
+        Student Name: <input type="text" ng-model="assignment.student_name" /><br />
+        Score: <input type="text" ng-model="assignment.score" /><br />
+        Date Completed: <input type="text" ng-model="assignment.date_completed" /><br />
+        <button ng-click="add(assignment)" />Save</button>
+      <!-- </form> -->
+      <h4>Assignments</h4>
+      <ul>
+        <li ng-repeat="assignment in assignments">{{assignment}}</li>
+      </ul>
+    </div>
 
   </body>
 </html>
