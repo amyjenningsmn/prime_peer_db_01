@@ -2,6 +2,15 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    watch: {
+    scripts: {
+    files: ['client/*.js'],
+    tasks: ['uglify'],
+    options: {
+    spawn: false,
+        },
+      },
+    },
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
@@ -27,6 +36,8 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+
 
   // Default task(s)
   grunt.registerTask('default', ['copy', 'uglify']);

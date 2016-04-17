@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="assignmentApp">
   <head lang="en">
     <meta charset="utf-8">
     <title>Assignment App</title>
-    <script src="/vendor/angular/angular.min.js"></script>
-    <script src="/assets/scripts/client.js"></script>
+    <script src="../vendor/angular/angular.min.js"></script>
+    <script src="../assets/scripts/client.min.js"></script>
+    <!-- ^^^ needed to go up to public, then down into directories -->
   </head>
-  <body ng-controller="MainController">
-    <h1>Assignment Application</h1>
-    <div >
-      <!-- <form novalidate> -->
-        {{test}}
-        Assignment Number: <input type="text" ng-model="assignment.assignment_number" /><br />
-        Student Name: <input type="text" ng-model="assignment.student_name" /><br />
-        Score: <input type="text" ng-model="assignment.score" /><br />
-        Date Completed: <input type="text" ng-model="assignment.date_completed" /><br />
-        <button ng-click="add(assignment)" />Save</button>
-      <!-- </form> -->
-      <h4>Assignments</h4>
-      <ul>
-        <li ng-repeat="assignment in assignments">{{assignment}}</li>
-      </ul>
+  <body ng-controller="StuffController">
+    <h1>Assignment Tracker</h1>
+
+    <div ng-repeat="assignment in assignments">
+      <!-- 'assignment' is a whatever key-name but 'assignments' is our array of assignments ($scope.assignments = [];) in Angular (client.js). 'assignment' will be used when referencing each key object in the array like {{assignment.student_name}} below. Those names have to match for it to know what we want-->
+      Name: {{assignment.student_name}} | Score: {{assignment.score}}<br/>
     </div>
 
-  </body>
+    <form ng-submit="sendData()">
+      <!-- Here's where we call our sendData() from our client.js. This will send the newly inputted data to the server where it will then be entered into the database. The 'ng-submit' will make it so that it will call the function once the 'submit' button is clicked.-->
+        <label>Student Name:</label>
+        <input type="text" ng-model="assignment.student_name" /><br/>
+        <label>Score:</label>
+        <input type="Number" ng-model="assignment.score"/><br/>
+        <label>Date Completed:</label>
+        <input type="Date" ng-model="assignment.date_completed"/><br/>
+        <label>Assignment Number:</label>
+        <input type="Number" ng-model="assignment.assignment_number"/><br/>
+        <input type="submit"/>
+        <!-- Clicking this will trigger our sendData() function -->
+     </form>
+
+   </body>
 </html>
